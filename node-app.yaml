@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-hw
+  namespace: ingress-basic
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-hw
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: nodejs-hw
+    spec:
+      containers:
+      - name: nodejs-hw
+        image: nzaksreg.azurecr.io/sample/hello-world:v2
+        ports:
+        - containerPort: 8080

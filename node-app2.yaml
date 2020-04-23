@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-hw2
+  namespace: ingress-basic
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-hw2
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: nodejs-hw2
+    spec:
+      containers:
+      - name: nodejs-hw2
+        image: nzaksreg.azurecr.io/sample/hello-world:v2
+        ports:
+        - containerPort: 8080
+      tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
